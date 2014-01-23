@@ -1,4 +1,4 @@
-cs571
+scf
 =====
 
-Homework Repository for CS571
+Homepage on Student Computing Facility at USC
