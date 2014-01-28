@@ -1,0 +1,150 @@
+html, body {
+
+	font-family: 'Open Sans', sans-serif;		
+
+	height: 100%;		
+}
+
+/* DOCUMENT ELEMENTS */
+
+.container {
+
+	/* take up the entire screen */
+
+	width: 100%;	
+	height: 100%;
+
+	min-height:100%;
+}
+
+.header {
+
+	/* place the header 50px from the top, sides and margin*/
+
+	width: 95%;
+
+	padding: 50px 20px 10px;
+	margin: 5px auto;
+
+	border-bottom: 1px solid #ccc;
+}
+
+.content {
+	
+	width: 90%;
+
+	margin: 50px 100px;	
+
+	text-align: center;	
+}
+
+.course {
+
+	text-align: left;
+}
+
+.course-name {
+
+	padding: 10px;
+
+}
+
+.navigation {
+
+	margin: 50px 0px;	
+	padding: 0px 5%;
+
+	position: absolute;
+	top: 0px; right: 0px;
+
+	width: 25%;
+	height: 100%;
+
+	text-align: right;	
+	
+}
+
+/* GENERIC ELEMENTS */
+
+a {
+
+	text-decoration: none;
+	color: black;	
+}
+
+a:hover {
+
+	color: #1CA1D2;
+	text-decoration: none;
+}
+
+p.dimtext {
+
+	color: #989898; 
+	font-size: medium;
+}
+
+/* SPECIFIC ELEMENTS */
+
+.links > li{
+
+
+	font-size: 20px;	
+	padding: 10px 30px;
+
+	text-align: right;
+}
+
+.prologue {	
+	
+	padding: 20px;
+
+}
+
+.prologue > p {
+	
+	font-size: large;
+	text-align: left;
+
+	line-height: 25px;
+
+	padding: 10px 0px;
+
+}
+
+.story{
+
+	font-size: small;
+
+	text-align: justify;
+	line-height: 24px;
+
+	margin: 50px 30px;
+	padding: 10px;
+
+	/*border-bottom: 1px dashed #ccc;*/
+	border-top: 2px solid #1CA1D2;
+	/*background-color: #F6FFFF;*/
+}
+
+.headline {
+
+/*	text-align: justify;
+	line-height: 24px;
+
+	padding: 10px 20px;*/
+
+}
+
+.text {
+
+	margin-top: 25px;
+	padding-top: 5px;
+
+	font-weight: bold;	
+
+/*	text-align: justify;
+	line-height: 24px;
+
+	padding: 10px 20px;*/
+}
