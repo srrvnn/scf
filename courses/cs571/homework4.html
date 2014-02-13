@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Saravanan Ganesh / Courses / CS571 / Assignment 4</title>
+
+    <style type="text/css">
+
+      #form_xml_display {
+
+        margin: 30px auto;
+        text-align: center;
+
+      }
+
+      #txt_url_xml_file {
+
+        margin: 20px 0px;
+        width: 200px;      
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <div id="content">
+
+      <form id="form_xml_display" action="#" method="POST" onsubmit="return fetchXML()">
+
+        <p> Enter URL for Plant Catalog XML File </p>
+        <input type="text" id="txt_url_xml_file" name="txt_url_xml_file"/> <br/>
+        <input type="submit" value="Submit Query"/>
+
+      </form>
+
+    </div>
+
+    <script type=text/javascript> 
+
+    var xhr; 
+    var xml_file;
+
+    var xmlDoc;
+
+    function fetchXML(){
+
+      var url_xml_file = document.getElementById('txt_url_xml_file').value;
+
+      if (url_xml_file.length < 1 ) {
+        alert("Please enter a URL for XML File in the text box.");
+      }
+      
+      var xml_file;
+
+      if (window.XMLHttpRequest) {
+
+        xhr = new XMLHttpRequest();
+
+      } else {
+
+        xhr = new ActiveXObject("Microsoft.XMLHttpRequest");
+      }
+
+      xhr.open("GET", url_xml_file, false);
+      xhr.send();
+
+      xml_file = xhr.responseXML; 
+
+      alert('Response Obtained. XML Header: ' + xml_file.documentElement.tagName);
+
+      // xhr.onreadystatechange = parseXML();      
+
+    }
+
+    function parseXML() {
+
+      if (xhr.readyState == 4) {
+              
+      }
+    }
+
+    </script>
+
+  </body>
+</html>
