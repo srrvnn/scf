@@ -15,7 +15,6 @@
 
         margin: 30px auto;
         text-align: center;
-
       }
 
       #txt_url_xml_file {
@@ -32,7 +31,7 @@
 
     <div id="content">
 
-      <form id="form_xml_display" action="#" method="POST" onsubmit="return fetchXML()">
+      <form id="form_xml_display" action="#" method="" onsubmit="return fetchXML()">
 
         <p> Enter URL for Plant Catalog XML File </p>
         <input type="text" id="txt_url_xml_file" name="txt_url_xml_file"/> <br/>
@@ -44,47 +43,152 @@
 
     <script type=text/javascript> 
 
-    var xhr; 
-    var xml_file;
+      var xhr; 
+      var xml_file;      
 
-    var xmlDoc;
+      function fetchXML() {
 
-    function fetchXML(){
+        var url_xml_file = document.getElementById('txt_url_xml_file').value;
 
-      var url_xml_file = document.getElementById('txt_url_xml_file').value;
+        if (url_xml_file.length < 1 ) {
+          alert("Please enter a URL for XML File in the text box.");
+        }
+        
+        var xml_file;
 
-      if (url_xml_file.length < 1 ) {
-        alert("Please enter a URL for XML File in the text box.");
+        if (window.XMLHttpRequest) {
+
+          xhr = new XMLHttpRequest();
+
+        } else {
+
+          xhr = new ActiveXObject("Microsoft.XMLHttpRequest");
+        }
+
+        xhr.open("GET", url_xml_file, false);
+        xhr.send();
+
+        xml_file = xhr.responseXML;             
+
+        // check if it is a valid xml     
+
+        if (xml_file === null) {
+
+          alert("Invalid XML File.");
+          return false;
+        }
+
+        parseXML(xml_file);
       }
-      
-      var xml_file;
 
-      if (window.XMLHttpRequest) {
+      function parseXML(xml_file) {        
 
-        xhr = new XMLHttpRequest();
+        var entities = xml_file.documentElement.childNodes;     
+        var columns = null; 
 
-      } else {
+        // checking for an empty xml file based on child nodes of root
 
-        xhr = new ActiveXObject("Microsoft.XMLHttpRequest");
-      }
+        if (entities.length < 1) {
 
-      xhr.open("GET", url_xml_file, false);
-      xhr.send();
+          alert('Empty XML File.');
+          return;
+        }
 
-      xml_file = xhr.responseXML; 
+        for (var i = 0; i < entities.length; i++) {
 
-      alert('Response Obtained. XML Header: ' + xml_file.documentElement.tagName);
+          if(entities[i].nodeName != "#text") {
 
-      // xhr.onreadystatechange = parseXML();      
+              columns = entities[i].childNodes;
+          }
+        }
 
-    }
+        // checking for an empty xml file based on #text only child elements for root
 
-    function parseXML() {
+        if (columns === null) {
 
-      if (xhr.readyState == 4) {
+          alert('Empty XML File.');
+          return;
+        }
+
+        var output_window = window.open('','_blank','scrollbars=1,height=500,width=800');  
+
+        output_window.document.write('<table border="1" style="margin: 10px auto; text-align:center;" cellpadding="10px"  >');  
+        output_window.document.write('<tr>');  
+
+        // printing headers for the table
+
+        var headers = new Array('COMMON','BOTANICAL','ZONE','LIGHT','PRICE','IMAGE');
+
+        for(var i = 0; i < headers.length; i++) {                
+
+            output_window.document.write('<th>');  
+            output_window.document.write(headers[i]);
+            output_window.document.write('</th>');         
+        }          
+
+        output_window.document.write('</tr>');  
+
+        // looping through each plant in the xml file
+
+        for(var i = 0; i < entities.length; i++) { 
+
+          output_window.document.write('<tr>'); 
+
+          if(entities[i].nodeName != "#text") {
+
+            var entities_columns = entities[i].childNodes;
+
+            // looping through each column for each plant 
+
+            for(var j = 0; j < headers.length; j++) {          
+
+              var entities_columns_node_value = null;
+
+              var entities_columns_nodes = entities[i].getElementsByTagName(headers[j]);
+
+              // checking for non existent nodes
+
+              if (entities[i].getElementsByTagName(headers[j])[0] === undefined) {
+
+                entities_columns_node_value = "";
+
+              } else {              
+
+                entities_columns_node = entities_columns_nodes[0];
+
+                // checking for existent nodes with empty values
+
+                if (entities_columns_node.childNodes[0] === undefined) {
+
+                  entities_columns_node_value = "";
+                } else {
+
+                  entities_columns_node_value = entities_columns_node.childNodes[0].nodeValue;
+                }       
+
+              }     
+
+              output_window.document.write('<td><span>');         
+
+              if (headers[j] == "IMAGE") {
+
+                output_window.document.write('<img src="http://www-scf.usc.edu/~csci571/2014Spring/hw4/' + entities_columns_node_value + '" width="150px" height="150px"/>');
+
+              } else {
+
+                output_window.document.write(entities_columns_node_value);                              
+              }              
+
+              output_window.document.write('</span></td>');
               
+            }                 
+          }          
+
+          output_window.document.write('</tr>');         
+        }  
+
+        output_window.document.write('</table>');
       }
-    }
 
     </script>
 
