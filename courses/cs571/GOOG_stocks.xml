@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<query xmlns:yahoo="http://www.yahooapis.com/v1/base.rng" yahoo:count="1" yahoo:created="2014-03-06T20:13:57Z" yahoo:lang="en-US">
+	<results>
+		<quote>
+			<Bid>1221.55</Bid>
+			<Change>+3.30</Change>
+			<DaysLow>1218.60</DaysLow>
+			<DaysHigh>1226.145</DaysHigh>
+			<YearLow>761.26</YearLow>
+			<YearHigh>1228.88</YearHigh>
+			<MarketCapitalization>410.5B</MarketCapitalization>
+			<LastTradePriceOnly>1221.5601</LastTradePriceOnly>
+			<Name>Google Inc.</Name>
+			<Open>1222.3101</Open>
+			<PreviousClose>1218.26</PreviousClose>
+			<ChangeinPercent>+0.27%</ChangeinPercent>
+			<Symbol>GOOG</Symbol>
+			<OneyrTargetPrice>1320.63</OneyrTargetPrice>
+			<Volume>922812</Volume>
+			<Ask>1221.88</Ask>
+			<AverageDailyVolume>2138910</AverageDailyVolume>
+		</quote>
+	</results>
+</query>
+<!-- total: 69 -->
+<!-- engine8.yql.gq1.yahoo.com -->
